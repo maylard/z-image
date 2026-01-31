@@ -109,6 +109,12 @@ class ModelManager:
 
     def _warmup(self) -> None:
         """Run warmup passes to trigger PyTorch/MPS compilation for common sizes."""
+        # Check if warmup should be skipped via environment variable
+        skip_warmup = os.environ.get("ZIMAGE_SKIP_WARMUP", "").lower() in ("1", "true", "yes")
+        if skip_warmup:
+            logger.info("Warmup skipped (ZIMAGE_SKIP_WARMUP is set)")
+            return
+
         try:
             from zimage import generate
 

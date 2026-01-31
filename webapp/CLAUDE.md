@@ -116,6 +116,7 @@ This works because scripts set `PYTHONPATH=src:$PYTHONPATH` (see start.sh).
 - `PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0` - Apple Silicon memory optimization (set in start.sh)
 - `ZIMAGE_ATTENTION` - Attention backend (`_native_flash` default for MPS)
 - `ZIMAGE_HEIGHT`, `ZIMAGE_WIDTH` - Image dimensions (CLI only)
+- `ZIMAGE_SKIP_WARMUP` - Set to `1`, `true`, or `yes` to skip warmup on startup
 
 ## UI Features
 

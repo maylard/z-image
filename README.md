@@ -90,6 +90,15 @@ Instead of running command-line generation that reloads the model each time, thi
 - Better performance
 - Browser opens automatically
 
+**Skip Warmup** (faster startup):
+```bash
+./webapp/start.sh --dev --no-warmup
+./webapp/start-prod.sh --no-warmup
+```
+- Startup is ~2-3 minutes faster
+- First generation at each size incurs ~30s compilation overhead
+- Useful for quick testing or when not generating images immediately
+
 **First startup** takes 3-5 minutes:
 1. Server starts immediately
 2. Model loads (~30-60 seconds)

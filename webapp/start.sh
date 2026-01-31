@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Start the Z-Image web application
-# Usage: ./start.sh [--dev]
+# Usage: ./start.sh [--dev] [--no-warmup]
 
 set -euo pipefail
 
@@ -18,16 +18,25 @@ else
     exit 1
 fi
 
-# Check if this is dev mode
+# Parse arguments
 DEV_MODE=false
-if [ "${1:-}" = "--dev" ]; then
-    DEV_MODE=true
-fi
+SKIP_WARMUP=false
+for arg in "$@"; do
+    if [ "$arg" = "--dev" ]; then
+        DEV_MODE=true
+    elif [ "$arg" = "--no-warmup" ] || [ "$arg" = "--skip-warmup" ]; then
+        SKIP_WARMUP=true
+    fi
+done
 
 # Start backend in background
 echo "📦 Starting backend server on http://localhost:8000..."
 cd "$PROJECT_DIR/.."
 export PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0
+if $SKIP_WARMUP; then
+    export ZIMAGE_SKIP_WARMUP=1
+    echo "⚡ Warmup disabled - faster startup, first generation may be slower"
+fi
 PYTHONPATH="$PROJECT_DIR/../src:$PROJECT_DIR" uvicorn webapp.backend.server:app \
     --host 0.0.0.0 \
     --port 8000 \
