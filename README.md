@@ -73,11 +73,22 @@ Instead of running command-line generation that reloads the model each time, thi
 
 ### Running the Webapp
 
+**Development Mode** (recommended for testing):
 ```bash
 ./webapp/start.sh --dev
 ```
+- Frontend runs on port **5173** with hot reload
+- Changes to code appear instantly
+- Browser opens automatically
 
-This starts both the backend (port 8000) and frontend (port 5173). The browser should open automatically to `http://localhost:5173`.
+**Production Mode**:
+```bash
+./webapp/start-prod.sh
+```
+- Frontend builds and runs on port **4173**
+- Optimized/minified code
+- Better performance
+- Browser opens automatically
 
 **First startup** takes 3-5 minutes:
 1. Server starts immediately
