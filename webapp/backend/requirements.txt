@@ -1,0 +1,7 @@
+# Z-Image Web Application Backend
+
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+python-multipart>=0.0.12
+websockets>=14.0
+aiofiles>=24.0.0
